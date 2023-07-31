@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,22 +13,26 @@
             margin: 0;
             padding: 0;
         }
+
         a {
             color: #fff;
             text-decoration: none;
         }
+
         body {
             color: #fff;
             font-family: "NexonLv1Gothic";
             font-weight: 300;
             background-color: #111;
         }
+
         #parallax__title {
             position: fixed;
             left: 20px;
             top: 20px;
             z-index: 1000;
         }
+
         #parallax__title h1 {
             font-size: 30px;
             border-bottom: 1px dashed #fff;
@@ -36,17 +41,21 @@
             font-weight: 400;
             display: inline-block;
         }
+
         #parallax__title p {
             font-size: 16px;
         }
+
         #parallax__title ul {
             margin-top: 10px;
         }
+
         #parallax__title li {
             display: inline;
         }
+
         #parallax__title li a {
-            width: 20px; 
+            width: 20px;
             height: 20px;
             border-radius: 50%;
             border: 1px dashed #fff;
@@ -55,6 +64,7 @@
             line-height: 20px;
             font-size: 12px;
         }
+
         #parallax__title li.active a {
             background: #fff;
             color: #000;
@@ -64,6 +74,7 @@
         #parallax__cont {
             overflow: hidden;
         }
+
         .parallax__item {
             width: 100%;
             height: 100vh;
@@ -73,12 +84,14 @@
             justify-content: center;
             flex-direction: column;
         }
-        #section2, 
-        #section4, 
-        #section6, 
+
+        #section2,
+        #section4,
+        #section6,
         #section8 {
             background-color: #222;
         }
+
         .parallax__item__num {
             position: absolute;
             right: 20px;
@@ -87,6 +100,7 @@
             line-height: 1;
             z-index: 10;
         }
+
         .parallax__item__img {
             position: absolute;
             left: 0;
@@ -97,6 +111,7 @@
             background-size: cover;
             background-position: center;
         }
+
         .parallax__item__img::after {
             content: '';
             position: absolute;
@@ -104,36 +119,46 @@
             top: 0;
             width: 100%;
             height: 100vh;
-            background-color: rgba(0,0,0,0.7);
+            background-color: rgba(0, 0, 0, 0.7);
             z-index: 1;
         }
+
         #section1 .parallax__item__img {
             background-image: url(assets/img/images02@2.jpg);
         }
+
         #section2 .parallax__item__img {
             background-image: url(assets/img/images03@2.jpg);
         }
+
         #section3 .parallax__item__img {
             background-image: url(assets/img/images04@2.jpg);
         }
+
         #section4 .parallax__item__img {
             background-image: url(assets/img/images05@2.jpg);
         }
+
         #section5 .parallax__item__img {
             background-image: url(assets/img/images06@2.jpg);
         }
+
         #section6 .parallax__item__img {
             background-image: url(assets/img/images07@2.jpg);
         }
+
         #section7 .parallax__item__img {
             background-image: url(assets/img/images08@2.jpg);
         }
+
         #section8 .parallax__item__img {
             background-image: url(assets/img/images09@2.jpg);
         }
+
         #section9 .parallax__item__img {
             background-image: url(assets/img/images10@2.jpg);
         }
+
         .parallax__item__title {
             font-size: 5vw;
             z-index: 100;
@@ -142,6 +167,7 @@
         }
     </style>
 </head>
+
 <body>
     <header id="parallax__title">
         <h1>GSAP Parallax Effect03</h1>
@@ -247,14 +273,38 @@
         // })
 
         // 02 다중고정 (9개 클라스에 담고) 포이치문 인덱스 순서로
-        gsap.utils.toArray(".parallax__item").forEach((panel, i) => {
+        // gsap.utils.toArray(".parallax__item").forEach((panel, i) => {
+        //     ScrollTrigger.create({
+        //         trigger: panel,
+        //         start: "top top",
+        //         pin: true,
+        //         pinSpacing: false
+        //     })
+        // })
+
+        // 03 스냅 고정 효과
+        let panels = gsap.utils.toArray(".parallax__item");
+        let tops = panels.map(panel => ScrollTrigger.create({ trigger: panel, start: "top top" }));
+        panels.forEach((panel, i) => {
             ScrollTrigger.create({
                 trigger: panel,
                 start: "top top",
                 pin: true,
                 pinSpacing: false
             })
+        });
+
+        ScrollTrigger.create({
+            snap: {
+                snapTo: (progress, self) => {
+                    let panelStarts = tops.map(st => st.start),
+                        snapScroll = gsap.utils.snap(panelStarts, self.scroll());
+                    return gsap.utils.normalize(0, ScrollTrigger.maxScroll(window), snapScroll);
+                },
+                duration: 0.5
+            }
         })
     </script>
 </body>
+
 </html>
