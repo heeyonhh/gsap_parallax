@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GSAP Scroll Effect 이질감</title>
+    <title>GSAP Scroll Effect 배경색 효과</title>
 
     <link href="https://webfontworld.github.io/NexonLv1Gothic/NexonLv1Gothic.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet">
@@ -13,22 +14,28 @@
             margin: 0;
             padding: 0;
         }
+
         a {
             color: #fff;
             text-decoration: none;
         }
+
         body {
+            /* 변수 만들기 */
+            --bg-color: #222;
+            background-color: var(--bg-color);
             color: #fff;
             font-family: "NexonLv1Gothic";
             font-weight: 300;
-            background-color: #111;
         }
+
         #parallax__title {
             position: fixed;
             left: 20px;
             top: 20px;
             z-index: 1000;
         }
+
         #parallax__title h1 {
             font-size: 30px;
             border-bottom: 1px dashed #fff;
@@ -37,17 +44,21 @@
             font-weight: 400;
             display: inline-block;
         }
+
         #parallax__title p {
             font-size: 16px;
         }
+
         #parallax__title ul {
             margin-top: 10px;
         }
+
         #parallax__title li {
             display: inline;
         }
+
         #parallax__title li a {
-            width: 20px; 
+            width: 20px;
             height: 20px;
             border-radius: 50%;
             border: 1px dashed #fff;
@@ -56,6 +67,7 @@
             line-height: 20px;
             font-size: 12px;
         }
+
         #parallax__title li.active a {
             background: #fff;
             color: #000;
@@ -63,52 +75,37 @@
 
         /* parallax__cont */
         #parallax__cont {
-            max-width: 1600px;
-            width: 98%;
-            margin: 0 auto;
-            /* background-color: rgba(255,255,255,0.1); */
-        }
-        .parallax__item {
-            width: 1000px;
-            max-width: 70vw;
-            margin: 30vw auto;
-            /* background-color: rgba(255,255,255,0.3); */
-            text-align: left;
-            margin-right: 0;
-            position: relative;
-            padding-top: 15vw;
-        }
-        .parallax__item:nth-child(even) {
-            margin-left: 0;
-            text-align: right;
-        }
-        .parallax__item__num {
-            font-size: 35vw;
-            position: absolute;
-            left: -5vw;
-            top: -13vw;
-            opacity: 0.07;
-            font-family: "Lato";
-            font-weight: 100;
-        }
-        .parallax__item:nth-child(even) .parallax__item__num {
-            left: auto;
-            right: -5vw;
-        }
-        .parallax__item__title {
-            padding-bottom: 5px;
-            font-weight: 400;
-        }
-        .parallax__item__imgWrap {
             width: 100%;
-            padding-bottom: 56.25%;
+        }
+
+        .parallax__item {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .parallax__item__num {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            font-size: 1vw;
+        }
+
+        .parallax__item__imgWrap {
+            width: 50%;
+            margin-right: 30%;
+            padding-bottom: 26.25%;
             background: #000;
             position: relative;
             overflow: hidden;
         }
+
         .parallax__item__img {
             position: absolute;
-            left: -5%; 
+            left: -5%;
             top: -5%;
             width: 110%;
             height: 110%;
@@ -118,64 +115,75 @@
             filter: saturate(0%);
             transition: all 1s;
         }
+
         .parallax__item__img:hover {
             filter: saturate(100%);
             transform: scale(1.025);
         }
+
+        .parallax__item__desc {
+            font-size: 3vw;
+            line-height: 1.4;
+            margin-top: 10vw;
+            margin-left: -4vw;
+            margin-right: 2vw;
+            z-index: 100;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            word-break: keep-all;
+        }
+
         #section1 .parallax__item__img {
             background-image: url(assets/img/images01@2.jpg);
         }
+
         #section2 .parallax__item__img {
             background-image: url(assets/img/images02@2.jpg);
         }
+
         #section3 .parallax__item__img {
             background-image: url(assets/img/images03@2.jpg);
         }
+
         #section4 .parallax__item__img {
             background-image: url(assets/img/images04@2.jpg);
         }
+
         #section5 .parallax__item__img {
             background-image: url(assets/img/images05@2.jpg);
         }
+
         #section6 .parallax__item__img {
             background-image: url(assets/img/images06@2.jpg);
         }
+
         #section7 .parallax__item__img {
             background-image: url(assets/img/images07@2.jpg);
         }
+
         #section8 .parallax__item__img {
             background-image: url(assets/img/images08@2.jpg);
         }
+
         #section9 .parallax__item__img {
             background-image: url(assets/img/images09@2.jpg);
         }
-        .parallax__item__desc {
-            font-size: 4vw;
-            line-height: 1.4;
-            margin-top: -5vw;
-            margin-left: -4vw;
-            z-index: 100;
-            position: relative;
-            word-break: keep-all;
-        }
-        .parallax__item:nth-child(even) .parallax__item__desc {
-            margin-left: auto;
-            margin-right: -4vw;
-        }
     </style>
 </head>
+
 <body>
     <header id="parallax__title">
-        <h1>GSAP Parallax Effect04</h1>
-        <p>GSAP scrollTrigger - 이질감 효과</p>
+        <h1>GSAP Parallax Effect07</h1>
+        <p>GSAP scrollTrigger - 배경색 효과</p>
         <ul>
             <li><a href="gsap01.html">1</a></li>
             <li><a href="gsap02.html">2</a></li>
             <li><a href="gsap03.html">3</a></li>
-            <li class="active"><a href="gsap04.html">4</a></li>
+            <li><a href="gsap04.html">4</a></li>
             <li><a href="gsap05.html">5</a></li>
             <li><a href="gsap06.html">6</a></li>
-            <li><a href="gsap07.html">7</a></li>
+            <li class="active"><a href="gsap07.html">7</a></li>
             <li><a href="gsap08.html">8</a></li>
             <li><a href="gsap09.html">9</a></li>
             <li><a href="gsap10.html">10</a></li>
@@ -189,9 +197,8 @@
     <!-- //parallax__title  -->
 
     <main id="parallax__cont">
-        <section id="section1" class="parallax__item">
+        <section id="section1" class="parallax__item" data-bgcolor="#111111">
             <span class="parallax__item__num">01</span>
-            <h2 class="parallax__item__title">section1</h2>
             <figure class="parallax__item__imgWrap">
                 <div class="parallax__item__img"></div>
             </figure>
@@ -199,9 +206,8 @@
         </section>
         <!-- //section1 -->
 
-        <section id="section2" class="parallax__item">
+        <section id="section2" class="parallax__item" data-bgcolor="#593b22">
             <span class="parallax__item__num">02</span>
-            <h2 class="parallax__item__title">section2</h2>
             <figure class="parallax__item__imgWrap">
                 <div class="parallax__item__img"></div>
             </figure>
@@ -209,9 +215,8 @@
         </section>
         <!-- //section2 -->
 
-        <section id="section3" class="parallax__item">
+        <section id="section3" class="parallax__item" data-bgcolor="#245922">
             <span class="parallax__item__num">03</span>
-            <h2 class="parallax__item__title">section3</h2>
             <figure class="parallax__item__imgWrap">
                 <div class="parallax__item__img"></div>
             </figure>
@@ -219,9 +224,8 @@
         </section>
         <!-- //section3 -->
 
-        <section id="section4" class="parallax__item">
+        <section id="section4" class="parallax__item" data-bgcolor="#243859">
             <span class="parallax__item__num">04</span>
-            <h2 class="parallax__item__title">section4</h2>
             <figure class="parallax__item__imgWrap">
                 <div class="parallax__item__img"></div>
             </figure>
@@ -229,9 +233,8 @@
         </section>
         <!-- //section4 -->
 
-        <section id="section5" class="parallax__item">
+        <section id="section5" class="parallax__item" data-bgcolor="#3f2459">
             <span class="parallax__item__num">05</span>
-            <h2 class="parallax__item__title">section5</h2>
             <figure class="parallax__item__imgWrap">
                 <div class="parallax__item__img"></div>
             </figure>
@@ -239,9 +242,8 @@
         </section>
         <!-- //section5 -->
 
-        <section id="section6" class="parallax__item">
+        <section id="section6" class="parallax__item" data-bgcolor="#59243c">
             <span class="parallax__item__num">06</span>
-            <h2 class="parallax__item__title">section6</h2>
             <figure class="parallax__item__imgWrap">
                 <div class="parallax__item__img"></div>
             </figure>
@@ -249,9 +251,8 @@
         </section>
         <!-- //section6 -->
 
-        <section id="section7" class="parallax__item">
+        <section id="section7" class="parallax__item" data-bgcolor="#3f2459">
             <span class="parallax__item__num">07</span>
-            <h2 class="parallax__item__title">section7</h2>
             <figure class="parallax__item__imgWrap">
                 <div class="parallax__item__img"></div>
             </figure>
@@ -259,9 +260,8 @@
         </section>
         <!-- //section7 -->
 
-        <section id="section8" class="parallax__item">
+        <section id="section8" class="parallax__item" data-bgcolor="#222222">
             <span class="parallax__item__num">08</span>
-            <h2 class="parallax__item__title">section8</h2>
             <figure class="parallax__item__imgWrap">
                 <div class="parallax__item__img"></div>
             </figure>
@@ -269,9 +269,8 @@
         </section>
         <!-- //section8 -->
 
-        <section id="section9" class="parallax__item">
+        <section id="section9" class="parallax__item" data-bgcolor="#592624">
             <span class="parallax__item__num">09</span>
-            <h2 class="parallax__item__title">section9</h2>
             <figure class="parallax__item__imgWrap">
                 <div class="parallax__item__img"></div>
             </figure>
@@ -284,49 +283,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/ScrollToPlugin.min.js"></script>
     <script>
-        // 01 이질감 표현하기 yPercent: -100 -100% 올라감 scrub 스코롤 값에 따라 계속 작동
-        // gsap.to(".parallax__item__desc", {
-        //     yPercent: -100,
-        //     ease: "none",
-        //     duration: 0.5,
+        // css에서 변수 만들고 오기
+        // 3번째 gsap 타임라인 방법
+        // 01 전체 배경 변경하기 (end 끝나는값 scrub 바뀌는것)
+
+        // let bg = gsap.timeline({
         //     scrollTrigger: {
-        //         trigger: ".parallax__item__desc",
-        //         start: "top bottom",
-        //         end: "bottom top",
+        //         start: 0,
+        //         end: "max",
         //         scrub: true,
-        //         markers: true
         //     }
-        // });
+        // })
+        // bg.to("body", {"--bg-color": "red"})
+        //     .to("body", {"--bg-color": "green"})
+        //     .to("body", {"--bg-color": "blue"})
 
-        //02 여러개 이질감 표현하기
-        gsap.utils.toArray(".parallax__item__desc").forEach(item => {
-            gsap.to(item, {
-                yPercent: -200,
-                duration: 0.5,
-                ease: "none",
-                scrollTrigger:{
-                    trigger: item,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: 0.5,
-                }
-            })
-        });
+        // 02 data 값으로 변경하기 섹션 태그에 데이터 컬러 넣어주고 오기(섹션별로 배경 변경)
 
-        // 짝수 홀수 나눠서 작업해주면 좋음 ! 
-        gsap.utils.toArray(".parallax__item__num").forEach(item => {
-            gsap.to(item, {
-                xPercent: -100,
-                duration: 0.5,
-                ease: "none",
-                scrollTrigger:{
-                    trigger: item,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: 0.5,
-                }
-            })
+        gsap.utils.toArray(".parallax__item").forEach((item) => {
+            let color = item.getAttribute("data-bgcolor");
+
+            ScrollTrigger.create({
+                trigger: item,
+                start: "top 50%",
+                end: "bottom 50%",
+                markers: true,
+
+                onEnter: () => gsap.to("body", {
+                    backgroundColor: color,
+                    duration: 1.4
+                }),
+                onEnterBack: () => gsap.to("body", {
+                    backgroundColor: color,
+                    duration: 1.4
+                }),
+            });
         });
     </script>
 </body>
+
 </html>
